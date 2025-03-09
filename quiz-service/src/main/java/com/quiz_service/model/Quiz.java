@@ -1,12 +1,11 @@
-package com.example.demo.model;
+package com.quiz_service.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+
 
 import java.util.List;
 
 @Entity
-@Data
 public class Quiz {
 
     @Id
@@ -14,6 +13,31 @@ public class Quiz {
     private Integer id;
     private String title;
 
-    @ManyToMany
-    private List<Question> questions;
+    @ElementCollection
+    private List<Integer> questionIds;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<Integer> getQuestionIds() {
+        return questionIds;
+    }
+
+    public void setQuestionIds(List<Integer> questionIds) {
+        this.questionIds = questionIds;
+    }
+
 }

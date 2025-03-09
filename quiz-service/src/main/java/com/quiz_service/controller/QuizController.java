@@ -1,7 +1,8 @@
-package com.example.demo.controller;
+package com.quiz_service.controller;
 
-import com.example.demo.model.Answer;
-import com.example.demo.service.QuizService;
+import com.quiz_service.model.Answer;
+import com.quiz_service.model.QuizDto;
+import com.quiz_service.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +17,11 @@ public class QuizController {
     @Autowired
     QuizService quizService;
 
-    // ex: http://localhost:8080/quiz/create?category=Java&numQ=5&title=Jquiz
-    // @RequestParam  for GET /get?id=1
+
     @PostMapping("create")
-    public ResponseEntity<Object> createQuiz(@RequestParam String category, @RequestParam int numQ, @RequestParam String title){
+    public ResponseEntity<Object> createQuiz(@RequestBody QuizDto quizDto){
         try{
-            System.out.println(numQ);
-            System.out.println(title);
-            quizService.createQuiz(category, numQ, title);
+            quizService.createQuiz(quizDto.getCategoryName(), quizDto.getNumQuestions(), quizDto.getTitle());
             return  new ResponseEntity<>("created quiz successfully", HttpStatus.CREATED);
         }catch (Exception e){
             e.printStackTrace();
@@ -33,7 +31,7 @@ public class QuizController {
 
     @GetMapping("get/{id}")
     // @PathVariable is for GET /get/1
-    public ResponseEntity<Object> getQuizQuestions(@PathVariable  int id){
+    public ResponseEntity<Object> getQuizQuestions(@PathVariable int id){
         try{
             return  new ResponseEntity<>(quizService.getQuizQuestions(id), HttpStatus.OK);
         }catch (Exception e){
@@ -49,6 +47,7 @@ public class QuizController {
         }catch (Exception e){
             e.printStackTrace();
         }
+
         return  new ResponseEntity<>("unable to get quizQuestions", HttpStatus.BAD_REQUEST);
     }
 
