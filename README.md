@@ -27,3 +27,32 @@ Technology Agnostic – Services can be built using different programming langua
 | Flexibility | Difficult to change one part | Easier to update or replace services |
 | Technology | Must use the same stack | Can use different stacks per service |
 | Data Storage | Shared database | Each service manages its own data |
+
+
+# neccessary dependencies
+
+![alt text](482578176_1277283876663795_9191014293640541041_n.jpg)
+
+- OpenFiegn
+
+    - OpenFeign is a declarative web service client. It simplifies the process of making HTTP requests to other microservices. Instead of writing complex RestTemplate or WebClient code, you define an interface with annotations that describe the API you want to consume. 
+  
+    - Feign handles the underlying HTTP communication, serialization, and deserialization of data.
+
+- Eureka Discory client
+
+    - The Eureka Discovery Client allows a Spring Boot microservice to register itself with a Eureka Server and discover other registered services.   
+    
+    - It enables service discovery, which is crucial in a microservice environment where service instances may be dynamically created or destroyed.
+
+- Eureka Server
+
+    - The Eureka Server is a service registry. It acts as a central repository where microservices can register themselves and discover other services.   
+    
+    - It maintains a list of all registered service instances and their locations.
+
+- Gateway
+
+    - A Gateway acts as a single entry point for all client requests to your microservices. It handles routing, filtering, and other cross-cutting concerns.   
+    
+    - Spring Cloud Gateway is a popular choice for building API gateways in Spring Boot microservice architectures
